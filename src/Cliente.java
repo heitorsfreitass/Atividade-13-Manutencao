@@ -9,10 +9,7 @@ public class Cliente {
     private int mesesComoCliente;
     private boolean mensalista;
 
-    private String banco;
-    private String agencia;
-    private String conta;
-    private String metodoPagamentoPreferencial;
+    private DadosCobranca dadosCobranca;
 
     public Cliente(String nome, String cpf, String telefone,
                    int pontosFidelidade, int mesesComoCliente, boolean mensalista,
@@ -23,26 +20,13 @@ public class Cliente {
         this.pontosFidelidade = pontosFidelidade;
         this.mesesComoCliente = mesesComoCliente;
         this.mensalista = mensalista;
-        this.banco = banco;
-        this.agencia = agencia;
-        this.conta = conta;
-        this.metodoPagamentoPreferencial = metodoPagamentoPreferencial;
+        this.dadosCobranca = new DadosCobranca(banco, agencia, conta, metodoPagamentoPreferencial);
     }
 
     public int calcularDesconto() {
-
-        if (mensalista && pontosFidelidade >= 4000) {
-            return 20;
-        }
-
-        if (mesesComoCliente >= 12 && pontosFidelidade >= 2000) {
-            return 10;
-        }
-
-        if (pontosFidelidade >= 1000) {
-            return 5;
-        }
-
+        if (mensalista && pontosFidelidade >= 4000) return 20;
+        if (mesesComoCliente >= 12 && pontosFidelidade >= 2000) return 10;
+        if (pontosFidelidade >= 1000) return 5;
         return 0;
     }
 
@@ -52,35 +36,15 @@ public class Cliente {
         System.out.println("Telefone: " + telefone);
         System.out.println("Pontos de fidelidade: " + pontosFidelidade);
         System.out.println("Mensalista: " + mensalista);
-        System.out.println("Cobrança: " + getDadosCobrancaFormatados());
+        System.out.println("Cobrança: " + dadosCobranca.getFormatado());
     }
 
-    public String getDadosCobrancaFormatados() {
-        return banco + " | Agência " + agencia + " | Conta " + conta
-                + " | Método preferencial: " + metodoPagamentoPreferencial;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public int getPontosFidelidade() {
-        return pontosFidelidade;
-    }
-
-    public int getMesesComoCliente() {
-        return mesesComoCliente;
-    }
-
-    public boolean isMensalista() {
-        return mensalista;
-    }
+    public String getDadosCobrancaFormatados() { return dadosCobranca.getFormatado(); }
+    public DadosCobranca getDadosCobranca() { return dadosCobranca; }
+    public String getNome() { return nome; }
+    public String getCpf() { return cpf; }
+    public String getTelefone() { return telefone; }
+    public int getPontosFidelidade() { return pontosFidelidade; }
+    public int getMesesComoCliente() { return mesesComoCliente; }
+    public boolean isMensalista() { return mensalista; }
 }
