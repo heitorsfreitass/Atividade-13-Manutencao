@@ -6,15 +6,12 @@ import java.time.LocalDateTime;
 public class Main {
 
     public static void main(String[] args) {
+        Endereco endereco = new Endereco("Avenida Brasil", "1500", "Centro", "Maringá", "PR", "87000-000");
+
         Estacionamento estacionamento = new Estacionamento(
                 "ParkTech Centro",
                 "12.345.678/0001-90",
-                "Avenida Brasil",
-                "1500",
-                "Centro",
-                "Maringá",
-                "PR",
-                "87000-000");
+                endereco);
 
         Cliente cliente = new Cliente(
                 "Mariana Souza",
@@ -36,13 +33,7 @@ public class Main {
                 "AP-889900",
                 "0800-123-456");
 
-        Vaga vaga = new Vaga(
-                "A12",
-                "Setor Azul",
-                true,
-                true,
-                "Mariana Souza",
-                LocalDateTime.of(2026, 6, 20, 9, 0));
+        Vaga vaga = new Vaga("A12", "Setor Azul", true, true);
 
         TicketEstacionamento ticket = new TicketEstacionamento(
                 "TCK-1001",
@@ -52,7 +43,7 @@ public class Main {
                 LocalDateTime.of(2026, 6, 20, 9, 30),
                 LocalDateTime.of(2026, 6, 20, 12, 15));
 
-        ReservaVaga reserva = new ReservaVaga(vaga, cliente);
+        ReservaVaga reserva = new ReservaVaga(vaga, cliente, "Mariana Souza", LocalDateTime.of(2026, 6, 20, 9, 0));
         RegistroPagamento pagamento = new RegistroPagamento(ticket, cliente, new BigDecimal("48.5"));
         CentralClientes centralClientes = new CentralClientes();
         PainelVagas painelVagas = new PainelVagas();
