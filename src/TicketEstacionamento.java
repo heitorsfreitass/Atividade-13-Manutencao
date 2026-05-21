@@ -10,15 +10,26 @@ public class TicketEstacionamento {
     private Vaga vaga;
     private boolean perdido;
 
-    public TicketEstacionamento(String codigo, Veiculo veiculo, Vaga vaga, boolean perdido) {
+    private LocalDateTime dataHoraEntrada;
+    private LocalDateTime dataHoraSaidaPrevista;
+
+    public TicketEstacionamento(String codigo, Veiculo veiculo, Vaga vaga,
+                                boolean perdido,
+                                LocalDateTime dataHoraEntrada,
+                                LocalDateTime dataHoraSaidaPrevista) {
+
         this.codigo = codigo;
         this.veiculo = veiculo;
         this.vaga = vaga;
         this.perdido = perdido;
+        this.dataHoraEntrada = dataHoraEntrada;
+        this.dataHoraSaidaPrevista = dataHoraSaidaPrevista;
     }
 
     public void imprimirTicket() {
-        DataHoraEstacionamento entrada = new DataHoraEstacionamento(veiculo.getDataHoraEntrada());
+
+        DataHoraEstacionamento entrada =
+                new DataHoraEstacionamento(dataHoraEntrada);
 
         System.out.println("Ticket: " + codigo);
         System.out.println("Veículo: " + veiculo.getPlaca());
@@ -55,17 +66,16 @@ public class TicketEstacionamento {
     }
 
     public LocalDateTime getDataHoraEntrada() {
-        return veiculo.getDataHoraEntrada();
+        return dataHoraEntrada;
     }
 
     public LocalDateTime getDataHoraSaidaPrevista() {
-        return veiculo.getDataHoraSaidaPrevista();
+        return dataHoraSaidaPrevista;
     }
 
-    // Método movido da classe 'OperacaoEstacionamento' pra cá, classe deletada.
     public long calcularMinutosPermanencia() {
         return Duration.between(
-                getDataHoraEntrada(),
-                getDataHoraSaidaPrevista()).toMinutes();
+                dataHoraEntrada,
+                dataHoraSaidaPrevista).toMinutes();
     }
 }

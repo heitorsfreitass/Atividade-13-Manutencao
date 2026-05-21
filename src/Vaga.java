@@ -22,6 +22,23 @@ public class Vaga {
         this.horarioReserva = horarioReserva;
     }
 
+    public String descreverStatus() {
+
+        if (ocupada && coberta) {
+            return "ocupada e coberta";
+        }
+
+        if (ocupada) {
+            return "ocupada";
+        }
+
+        if (coberta) {
+            return "livre e coberta";
+        }
+
+        return "livre";
+    }
+
     public String getCodigo() {
         return codigo;
     }

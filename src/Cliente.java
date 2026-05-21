@@ -29,6 +29,23 @@ public class Cliente {
         this.metodoPagamentoPreferencial = metodoPagamentoPreferencial;
     }
 
+    public int calcularDesconto() {
+
+        if (mensalista && pontosFidelidade >= 4000) {
+            return 20;
+        }
+
+        if (mesesComoCliente >= 12 && pontosFidelidade >= 2000) {
+            return 10;
+        }
+
+        if (pontosFidelidade >= 1000) {
+            return 5;
+        }
+
+        return 0;
+    }
+
     public void imprimirResumo() {
         System.out.println("Cliente: " + nome);
         System.out.println("CPF: " + cpf);
@@ -65,21 +82,5 @@ public class Cliente {
 
     public boolean isMensalista() {
         return mensalista;
-    }
-
-    public String getBanco() {
-        return banco;
-    }
-
-    public String getAgencia() {
-        return agencia;
-    }
-
-    public String getConta() {
-        return conta;
-    }
-
-    public String getMetodoPagamentoPreferencial() {
-        return metodoPagamentoPreferencial;
     }
 }
